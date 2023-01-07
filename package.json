@@ -2,8 +2,11 @@
   "name": "node_monkey_alarm",
   "version": "0.0.1",
   "description": "Alarm RPI GPIO Project",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "source": "src/index.js",
+  "type": "module",
   "scripts": {
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +24,7 @@
     "GPIO"
   ],
   "author": "ANGERSON JOSE AMUNDARAY RENGIFO",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/mnka_infrastructure/node_monkey_alarm/issues"
   },
