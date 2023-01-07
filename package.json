@@ -1,0 +1,29 @@
+{
+  "name": "node_monkey_alarm",
+  "version": "0.0.1",
+  "description": "Alarm RPI GPIO Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/mnka_infrastructure/node_monkey_alarm.git"
+  },
+  "keywords": [
+    "ALARM",
+    "MNKA",
+    "MONKEY",
+    "NODEJS",
+    "NODE",
+    "RAPI",
+    "RASPBERRY",
+    "GPIO"
+  ],
+  "author": "ANGERSON JOSE AMUNDARAY RENGIFO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/mnka_infrastructure/node_monkey_alarm/issues"
+  },
+  "homepage": "https://gitlab.com/mnka_infrastructure/node_monkey_alarm#readme"
+}
