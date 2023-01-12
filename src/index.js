@@ -1,7 +1,16 @@
-const hello = (name = 'Amundaray') => {
-  return `Hello, ${name}`;
+import { initLcdService } from "./services/alarm_service.js";
+import initServer from "./middleware/alarm_middleware.js";
+
+
+process.on('SIGINT',() => {
+  console.clear();
+  console.log('Received SIGINT - Exiting OK');
+  process.exit();
+})
+
+const init = async () => {
+  initLcdService();
+  initServer();
 }
 
-console.log(hello());
-
-export default hello;
+await init();

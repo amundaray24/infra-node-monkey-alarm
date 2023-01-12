@@ -1,0 +1,29 @@
+import { buzzer } from "../configurations/gpio_outputs_configuration.js";
+
+const buzzerArmAlarmSound = async () => {
+  let workCicle = 0;
+  for (let i = 0; i < 2; i++) {;
+    workCicle += 80;
+    buzzer.pwmWrite(workCicle);
+    await _sleep(100)
+    buzzer.pwmWrite(255);
+    await _sleep(100)
+  }
+}
+
+const buzzerDisarmAlarmSound = async () => {
+  buzzer.pwmWrite(190);
+  await _sleep(100)
+  buzzer.pwmWrite(255);
+}
+
+const _sleep = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+export {
+  buzzerArmAlarmSound,
+  buzzerDisarmAlarmSound
+}
