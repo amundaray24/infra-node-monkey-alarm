@@ -4,7 +4,8 @@ import {
   initLcd,
   displayArmAlarmMessage,
   displayDisarmAlarmMessage,
-  displayAlarmDispatchMessage
+  displayAlarmDispatchMessage,
+  displayInvalidPasswordMessage
 } from "./lcd_service.js";
 
 import { 
@@ -17,6 +18,7 @@ import {
 let dispatched = false;
 let armed = false;
 let silenced = false;
+let tries = 5;
 
 const initLcdService = () => {
   initLcd();
@@ -40,19 +42,41 @@ const armAlarm = async (request) => {
 }
 
 const disarmAlarm = async (request) => {
-  armed = false;
-  dispatched = false;
-  return new Promise(async(resolve) => {
-    displayDisarmAlarmMessage()
+  return new Promise(async(resolve,reject) => {
+    if (request.password === '221115' && armed) {
+      armed = false;
+      dispatched = false;
+      tries = 5;
+      displayDisarmAlarmMessage()
       .then(() => {
         if (request.alert) buzzerDisarmAlarmSound();
       });
-    resolve(
-      {
-        date: new Date(),
-        message: 'Alarm Disarmed!'
-      }
-    );
+      resolve(
+        {
+          date: new Date(),
+          message: 'Alarm Disarmed!'
+        }
+      );
+    } else if (!dispatched && !armed) {
+      resolve(
+        {
+          date: new Date(),
+          message: 'Alarm is already disarmed!'
+        }
+      );
+    } else {
+      if (tries === 0) tries = 5;
+      displayInvalidPasswordMessage(tries--)
+        .then(() => {
+          if (request.alert) buzzerDisarmAlarmSound();
+        })
+      reject(
+        {
+          date: new Date(),
+          message: 'Invalid Password'
+        }
+      )
+    }
   });
 }
 
