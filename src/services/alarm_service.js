@@ -9,7 +9,8 @@ import {
 
 import { 
   buzzerArmAlarmSound,
-  buzzerDisarmAlarmSound
+  buzzerDisarmAlarmSound,
+  buzzerAlarmDispatched
 } from "./buzzer_service.js";
 
 
@@ -39,11 +40,11 @@ const armAlarm = async (request) => {
 }
 
 const disarmAlarm = async (request) => {
+  armed = false;
+  dispatched = false;
   return new Promise(async(resolve) => {
     displayDisarmAlarmMessage()
       .then(() => {
-        armed = false;
-        dispatched = false;
         if (request.alert) buzzerDisarmAlarmSound();
       });
     resolve(
@@ -69,7 +70,7 @@ const dispatchAlarm = async () => {
   do {    
     if (dispatch && dispatched) {
       dispatch = false;
-      if (!silenced) buzzerArmAlarmSound();
+      if (!silenced) buzzerAlarmDispatched();
       await displayAlarmDispatchMessage()
         .then(() => {
           dispatch = true;

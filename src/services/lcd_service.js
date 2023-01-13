@@ -15,7 +15,7 @@ const displayAlarmDispatchMessage = () => {
     await clearDisplay(true);
     await displayStringLine('!Alarm Dispatch!',1);
     await displayStringLine('Movement-Detect',2);
-    await _sleep(2000);
+    await _sleep(1000);
     await clearDisplay(false);
     resolve();
   });
@@ -23,6 +23,7 @@ const displayAlarmDispatchMessage = () => {
 
 const displayDisarmAlarmMessage = () => {
   return new Promise( async (resolve) => {
+    await _sleep(1000);
     await clearDisplay(true);
     await displayStringLine('Alarm Deactivated',1);
     await displayStringLine('! Welcome Back !',2);
