@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  node_monkey_alarm:
+    image: node_monkey_alarm:0.0.1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: node_monkey_alarm
+    privileged: true
+    ports:
+      - "3000:3000"
+    networks:
+      - node_monkey_alarm_network
+networks:
+  node_monkey_alarm_network:
+    name: node_monkey_alarm_network
